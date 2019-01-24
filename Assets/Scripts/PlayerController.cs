@@ -11,13 +11,13 @@ public class PlayerController : MonoBehaviour
 
     //PRIVATE VARIABLES
     private Rigidbody2D rBody;
+    private bool canJump;
     
 
     // Start is called before the first frame update
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
-        rBody.freezeRotation = true;
     }
 
     // // Update is called once per frame
@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             rBody.AddForce(new Vector2(0,jumpSpeed));
         }
+
+
+        //raycast rom your feet downwards towards the ground
     }
 
     /// <summary>
