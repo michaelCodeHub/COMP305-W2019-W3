@@ -6,12 +6,12 @@ public class PlayerController : MonoBehaviour
 {
 
     //PUBLIC VARIABLE
-    public float speed = 10;
+    public float speed = 2;
     public float jumpSpeed = 500;
 
     //PRIVATE VARIABLES
     private Rigidbody2D rBody;
-    private bool canJump;
+    private bool canJump = true;
     
 
     // Start is called before the first frame update
@@ -25,13 +25,29 @@ public class PlayerController : MonoBehaviour
     {
         //Space click
         
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space) && canJump){
             rBody.AddForce(new Vector2(0,jumpSpeed));
+            canJump = false;
         }
 
 
         //raycast rom your feet downwards towards the ground
     }
+
+    void OnCollisionEnter2D (Collision2D col)
+    {
+        canJump = true;
+    }
+    
+    // void OnCollisionExit (Collision col)
+    // {
+    //     if(col.gameObject.name == "GrassSprite")
+    //     {
+    //         canJump = false;
+    //     }
+    // }
+
+    
 
     /// <summary>
     /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
@@ -47,6 +63,11 @@ public class PlayerController : MonoBehaviour
 
         float currentVelocityY = rBody.velocity.y;
 
-        rBody.velocity = new Vector2(horiz*speed,currentVelocityY);
+        if(canJump){
+            rBody.velocity = new Vector2(horiz*speed*2,currentVelocityY);
+        }
+        else{
+            rBody.velocity = new Vector2(horiz*speed,currentVelocityY);
+        }
     }
 }
