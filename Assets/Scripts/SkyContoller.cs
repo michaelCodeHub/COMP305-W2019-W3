@@ -18,7 +18,7 @@ public class SkyContoller : MonoBehaviour
 
 		// Check bottom boundary
 		if (currentPosition.x <= -5) {
-			this._Reset();
+			// this._Reset();
 		}
 	}
 

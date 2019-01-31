@@ -36,6 +36,10 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D (Collision2D col)
     {
+        if(col.gameObject.name == "CoinSprite")
+        {
+            Destroy(col.gameObject);
+        }
         canJump = true;
     }
     
@@ -64,7 +68,7 @@ public class PlayerController : MonoBehaviour
         float currentVelocityY = rBody.velocity.y;
 
         if(canJump){
-            rBody.velocity = new Vector2(horiz*speed*2,currentVelocityY);
+            rBody.velocity = new Vector2(horiz*speed,currentVelocityY);
         }
         else{
             rBody.velocity = new Vector2(horiz*speed,currentVelocityY);
